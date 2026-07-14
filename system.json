@@ -1,5 +1,5 @@
 {
-  "id": "arm5e_Batman_Custom",
+  "id": "arm5e_batman_custom",
   "title": "Ars Magica 5th Edition (Custom build by Batman)",
   "description": "Ars Magica 5e for Foundry VTT, mandatory arm5e-compendia module at (https://github.com/Xzotl42/arm5e-compendia/releases/latest/download/module.json)",
   "version": "3.0.1.10",
@@ -20,25 +20,72 @@
     ]
   },
   "authors": [
-    { "name": "xzotl", "contribution": "Main dev and official maintainer" },
-    { "name": "ialbiol", "contribution": "Dev" },
-    { "name": "phaldaros", "contribution": "Original dev" },
-    { "name": "Teotimus", "contribution": "Spanish version" },
-    { "name": "sylph", "contribution": "Graphical design" },
-    { "name": "Ludo.Bermejo", "contribution": "Dev" },
-    { "name": "jupotter", "contribution": "Dev, French version" },
-    { "name": "Lanneval", "contribution": "French version" },
-    { "name": "Orneen", "contribution": "French version, compendium content" },
-    { "name": "N0Br41nZ", "contribution": "Italian version" },
-    { "name": "Ramon Alves", "contribution": "Portuguese (BR) version" },
-    { "name": "jaircunhavianna", "contribution": "Compendium content" },
-    { "name": "Moo Man", "contribution": "Dev" }
+    {
+      "name": "xzotl",
+      "contribution": "Main dev and official maintainer"
+    },
+    {
+      "name": "ialbiol",
+      "contribution": "Dev"
+    },
+    {
+      "name": "phaldaros",
+      "contribution": "Original dev"
+    },
+    {
+      "name": "Teotimus",
+      "contribution": "Spanish version"
+    },
+    {
+      "name": "sylph",
+      "contribution": "Graphical design"
+    },
+    {
+      "name": "Ludo.Bermejo",
+      "contribution": "Dev"
+    },
+    {
+      "name": "jupotter",
+      "contribution": "Dev, French version"
+    },
+    {
+      "name": "Lanneval",
+      "contribution": "French version"
+    },
+    {
+      "name": "Orneen",
+      "contribution": "French version, compendium content"
+    },
+    {
+      "name": "N0Br41nZ",
+      "contribution": "Italian version"
+    },
+    {
+      "name": "Ramon Alves",
+      "contribution": "Portuguese (BR) version"
+    },
+    {
+      "name": "jaircunhavianna",
+      "contribution": "Compendium content"
+    },
+    {
+      "name": "Moo Man",
+      "contribution": "Dev"
+    }
   ],
-  "esmodules": ["module/arm5e.js"],
-  "styles": ["css/arm5e.css", "css/Ars-Magica-icons.css"],
+  "esmodules": [
+    "module/arm5e.js"
+  ],
+  "styles": [
+    "css/arm5e.css",
+    "css/Ars-Magica-icons.css"
+  ],
   "flags": {
     "hotReload": {
-      "extensions": ["css", "json"]
+      "extensions": [
+        "css",
+        "json"
+      ]
     }
   },
   "documentTypes": {
@@ -108,7 +155,6 @@
       "damage": {}
     }
   },
-
   "packs": [
     {
       "name": "actors",
@@ -186,7 +232,10 @@
     }
   ],
   "socket": true,
-  "grid": { "distance": 3, "units": "ft" },
+  "grid": {
+    "distance": 3,
+    "units": "ft"
+  },
   "url": "https://github.com/Batman-q96/arm5e",
   "manifest": "https://raw.githubusercontent.com/Batman-q96/arm5e/refs/heads/Custom-ID/system.json",
   "download": "http://github.com/Batman-q96/arm5e/archive/Custom-ID.zip",
