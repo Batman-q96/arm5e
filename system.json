@@ -187,8 +187,8 @@
   ],
   "socket": true,
   "grid": { "distance": 3, "units": "ft" },
-  "url": "https://github.com/xzotl42/arm5e",
-  "manifest": "https://raw.githubusercontent.com/xzotl42/arm5e/master/system.json",
-  "download": "https://github.com/xzotl42/arm5e/archive/master.zip",
+  "url": "https://github.com/Batman-q96/arm5e",
+  "manifest": "https://raw.githubusercontent.com/Batman-q96/arm5e/master/system.json",
+  "download": "https://github.com/Batman-q96/arm5e/archive/master.zip",
   "license": "LICENSE.txt"
 }
