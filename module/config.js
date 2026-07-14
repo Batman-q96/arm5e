@@ -12,7 +12,7 @@ export const ARM5E = {};
  * probably not change during play
  * @type {Object}
  */
-ARM5E.SYSTEM_ID = "arm5e";
+ARM5E.SYSTEM_ID = "arm5e_batman_custom";
 ARM5E.REF_MODULE_ID = "arm5e-compendia";
 ARM5E.character = {};
 
