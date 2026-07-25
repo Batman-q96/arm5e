@@ -999,6 +999,14 @@ async function noRoll(actor, specialBehavior, callback) {
   // actor.rollInfo.reset();
 }
 
+async function spontNoFatigue(actor, specialBehavior, callback) {
+  actor.rollInfo.magic.divide = actor.system.bonuses.arts.spontDividerNoFatigue;
+  actor.rollInfo.impact.fatigue.use = 0;
+  actor.rollInfo.impact.fatigue.fail = 0;
+  actor.rollInfo.impact.fatigue.partial = 0;
+  return await noRoll(actor, specialBehavior, callback);
+}
+
 /**
  *
  * @param actor
@@ -1039,5 +1047,6 @@ export {
   noRoll,
   changeMightCallback,
   loseFatigueLevelCallback,
+  spontNoFatigue,
   useItemCharge
 };

@@ -50,7 +50,7 @@ Thanks to various contributors at https://game-icons.net for some default icons
 
 ![Latest Release Download Count](https://img.shields.io/github/downloads/Xzotl42/arm5e/latest/arm5e.zip)
 
-![Release 2.4.0.31 Download Count](https://img.shields.io/github/downloads/Xzotl42/arm5e/v2.4.0.31/arm5e.zip)
+![Release 2.4.0.31 Download Count (v12)](https://img.shields.io/github/downloads/Xzotl42/arm5e/v2.4.1.19/arm5e.zip)
 
 ![Release 2.3.2.29 Download Count (V10)](https://img.shields.io/github/downloads/Xzotl42/arm5e/v2.3.2.29/arm5e.zip)
 
@@ -91,7 +91,7 @@ IMPORTANT: It is recommended to do a backup of your world before loading it, thi
 
 ## Credits
 
-<b>Authors and contributors:</b>xzotl (Main dev), ialbiol, phaldaros, sylph, Ludo.Bermejo, juppoter, Lanneval, Orneen, N0Br4inZ, Ramon Alves, jaircunhavianna, Moo Man<br>
+<b>Authors and contributors:</b>xzotl (Main dev), ialbiol, phaldaros, sylph, Ludo.Bermejo, juppoter, Lanneval, Orneen, N0Br4inZ, Ramon Alves, jaircunhavianna, Moo Man, Batman<br>
 
 ## Feedback
 

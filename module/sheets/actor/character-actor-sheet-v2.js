@@ -1049,7 +1049,7 @@ export class Arm5eCharacterActorSheetV2 extends ArM5eActorSheetV2 {
   static async itemAdd(event, target) {
     event.preventDefault();
     if (
-      this.actor.system.codex.linked &&
+      this.actor.system.codex?.linked &&
       ["spells", "effects"].includes(target.dataset.compendium)
     ) {
       this.actor.system.codex.document.sheet?.render(true);
