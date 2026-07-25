@@ -5,7 +5,8 @@ import {
   noRoll,
   changeMightCallback,
   loseFatigueLevelCallback,
-  useItemCharge
+  useItemCharge,
+  spontNoFatigue
 } from "../helpers/dice.js";
 import { castSpell, castSupernaturalEffect, noFatigue } from "../helpers/magic.js";
 import {
@@ -120,7 +121,7 @@ const ROLL_PROPERTIES = {
     SCHEMA: MagicalEffectSchema,
     CALLBACK: castSpell,
     ALTER_ROLL: noFatigue,
-    ALT_ACTION: noRoll,
+    ALT_ACTION: spontNoFatigue,
     ALT_ACTION_LABEL: "arm5e.dialog.button.noroll"
   },
   SPONT: {
@@ -131,7 +132,7 @@ const ROLL_PROPERTIES = {
     SCHEMA: MagicalEffectSchema,
     CALLBACK: castSpell,
     ALTER_ROLL: noFatigue,
-    ALT_ACTION: noRoll,
+    ALT_ACTION: spontNoFatigue,
     ALT_ACTION_LABEL: "arm5e.dialog.button.noroll"
   },
   CHAR: {
@@ -387,7 +388,9 @@ export class RollWindow extends HandlebarsApplicationMixin(ApplicationV2) {
         `systems/${ARM5E.SYSTEM_ID}/templates/roll/parts/combat-init.hbs`
       ]
     },
-    characteristic: { template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-characteristic.hbs` },
+    characteristic: {
+      template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-characteristic.hbs`
+    },
     magic: {
       template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-magic.hbs`,
       templates: [
@@ -405,9 +408,15 @@ export class RollWindow extends HandlebarsApplicationMixin(ApplicationV2) {
     supernatural: { template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-supernatural.hbs` },
     aging: { template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-aging.hbs` },
     crisis: { template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-aging-crisis.hbs` },
-    twilightControl: { template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-twilightControl.hbs` },
-    twilightStrength: { template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-twilightStrength.hbs` },
-    twilightComplexity: { template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-twilightComplexity.hbs` },
+    twilightControl: {
+      template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-twilightControl.hbs`
+    },
+    twilightStrength: {
+      template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-twilightStrength.hbs`
+    },
+    twilightComplexity: {
+      template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-twilightComplexity.hbs`
+    },
     twilightUnderstanding: {
       template: `systems/${ARM5E.SYSTEM_ID}/templates/roll/roll-twilightUnderstanding.hbs`
     },

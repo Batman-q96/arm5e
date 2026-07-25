@@ -1,3 +1,15 @@
+## 3.0.1.14 Stentorius BF7
+
+### Compatibility - UPDATED
+
+- Verified for 14.365
+
+### Bug fixes
+
+- Fix critical bug for spontaneous magic without fatigue (ie: it divides properly by 5, no fatigue loss...)
+- It is possible for beasts to add Items to their sheet again.
+- [technical] Fixing non-reg tests
+
 ## 3.0.1.13 Stentorius BF6
 
 ### Compatibility

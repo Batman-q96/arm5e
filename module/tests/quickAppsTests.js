@@ -1,6 +1,7 @@
 import { getCompanion, getMagus } from "./testData.js";
 import { QuickVitals, QuickCombat } from "../helpers/combat.js";
 import { QuickMagic } from "../helpers/magic.js";
+import { ArsApps } from "../ui/apps.js";
 
 export function registerQuickAppsIntegrationTesting(quench) {
   quench.registerBatch(
@@ -426,7 +427,7 @@ export function registerQuickAppsIntegrationTesting(quench) {
           this.timeout(300000);
           // This tests the helper function quickMagic
           // For a companion (non-magus), it should return early
-          const result = await quickMagic(companion.name, companion);
+          const result = await ArsApps.quickMagic(companion.name, companion);
           assert.isUndefined(result, "quickMagic should return undefined for non-magus");
         });
 
@@ -500,7 +501,7 @@ export function registerQuickAppsIntegrationTesting(quench) {
           this.timeout(300000);
 
           // Test quickVitals helper
-          const vitalsResult = await quickVitals(companion.name, companion);
+          const vitalsResult = await ArsApps.quickVitals(companion.name, companion);
           assert.property(
             companion.apps,
             Object.keys(companion.apps)[0],
@@ -508,11 +509,11 @@ export function registerQuickAppsIntegrationTesting(quench) {
           );
 
           // Test quickCombat helper
-          const combatResult = await quickCombat(companion.name, companion);
+          const combatResult = await ArsApps.quickCombat(companion.name, companion);
           assert.isAbove(Object.keys(companion.apps).length, 0, "combat app should be created");
 
           // Test quickMagic helper
-          const magicResult = await quickMagic(magus.name, magus);
+          const magicResult = await ArsApps.quickMagic(magus.name, magus);
           assert.isAbove(Object.keys(magus.apps).length, 0, "magic app should be created");
 
           await new Promise((resolve) => setTimeout(resolve, 1000));

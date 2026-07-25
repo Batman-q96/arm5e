@@ -105,6 +105,16 @@ export function registerMagicRollTesting(quench) {
           // Ensure clean state before each test
           await magus.rest();
           await magus.restoreHealth();
+          // Restore confidence points spent by testConfidenceUsage in previous tests.
+          // canUseConfidencePoint() returns false when con.points === 0, which causes
+          // _applyImpact to collapse pending/fail fatigue into fatigueLevelsLost immediately,
+          // producing wrong values when the roll is a partial success.
+          await magus.update({
+            "system.con.points": magus.system.con.score,
+            // Reset stances changed by "Spell loud and exaggerated" to their defaults.
+            "system.stances.voiceStance": "firm",
+            "system.stances.gesturesStance": "bold"
+          });
           log(false, "=== Clean state prepared for test ===");
           log(false, "Current fatigue:", magus.system.fatigueCurrent);
         });

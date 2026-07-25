@@ -49,7 +49,7 @@ export function registerVisTesting(quench) {
           let sheet = entry.sheet;
           // const activity = new VisExtractionActivity(lab, magus);
 
-          const sheetData = await sheet.getData();
+          const sheetData = await sheet._prepareContext({});
           log(false, JSON.stringify(sheetData.system));
           // sheet._tabs[0].activate("advanced");
           expect(entry.system.done).to.equal(false);
@@ -60,7 +60,7 @@ export function registerVisTesting(quench) {
           expect(entry.system.progress.arts.length).to.equal(0);
           expect(entry.system.progress.newSpells.length).to.equal(0);
 
-          result = await sheet._onProgressApply(event, false);
+          result = await sheet._progressApply({ sourceModifier: 0 });
 
           expect(entry.system.achievements[0].type).to.equal("vis");
           const visId = entry.system.achievements[0]._id;
@@ -69,7 +69,7 @@ export function registerVisTesting(quench) {
           let visItem = magus.items.get(visId);
           expect(visItem.system.quantity === 2);
           expect(visItem.system.art === "vi");
-          await sheet._onProgressRollback(undefined, false);
+          await sheet._progressRollback(false);
 
           expect(!magus.items.has(visId));
 
@@ -89,7 +89,7 @@ export function registerVisTesting(quench) {
           let sheet = entry.sheet;
           // const activity = new VisExtractionActivity(lab, magus);
 
-          const sheetData = await sheet.getData();
+          const sheetData = await sheet._prepareContext({});
           log(false, JSON.stringify(sheetData.system));
           // sheet._tabs[0].activate("advanced");
           expect(entry.system.done).to.equal(false);
@@ -100,7 +100,7 @@ export function registerVisTesting(quench) {
           expect(entry.system.progress.arts.length).to.equal(0);
           expect(entry.system.progress.newSpells.length).to.equal(0);
 
-          result = await sheet._onProgressApply(event, false);
+          result = await sheet._progressApply({ sourceModifier: 0 });
 
           expect(entry.system.achievements[0].type).to.equal("vis");
           const visId = entry.system.achievements[0]._id;
@@ -109,7 +109,7 @@ export function registerVisTesting(quench) {
           let visItem = magus.items.get(visId);
           expect(visItem.system.quantity === 2);
           expect(visItem.system.art === "vi");
-          await sheet._onProgressRollback(undefined, false);
+          await sheet._progressRollback(false);
 
           expect(!magus.items.has(visId));
 
