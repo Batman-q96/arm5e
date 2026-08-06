@@ -209,7 +209,7 @@ const ROLL_PROPERTIES = {
     MODE: ROLL_MODES.NONE, // use dataset.mode
     MODIFIERS: 7,
     TITLE: "arm5e.dialog.title.rolldie",
-    // ACTION_LABEL: "arm5e.dialog.powerUse",
+    ALT_ACTION_LABEL: "arm5e.dialog.powerUse",
     CALLBACK: castSupernaturalEffect
   },
   COMBATDAMAGE: {
@@ -322,6 +322,17 @@ export class RollWindow extends HandlebarsApplicationMixin(ApplicationV2) {
       });
     }
 
+    if (rollMode & ROLL_MODES.NO_ROLL) {
+      btns.push({
+        label: game.i18n.localize(
+          rollProperties.ACTION_LABEL ? rollProperties.ACTION_LABEL : "arm5e.dialog.button.noroll"
+        ),
+        icon: "fas fa-check",
+        action: "noRoll",
+        cssClass: "dialog-button"
+      });
+    }
+
     if (rollProperties.ALT_ACTION) {
       btns.push({
         label: game.i18n.localize(rollProperties.ALT_ACTION_LABEL),
@@ -369,6 +380,7 @@ export class RollWindow extends HandlebarsApplicationMixin(ApplicationV2) {
     actions: {
       stressRoll: RollWindow.stressRoll,
       simpleRoll: RollWindow.simpleRoll,
+      noRoll: RollWindow.noRoll,
       explodingRoll: RollWindow.explodingRoll,
       botchingRoll: RollWindow.botchingRoll,
       cancel: RollWindow.onCancel,
@@ -605,6 +617,15 @@ export class RollWindow extends HandlebarsApplicationMixin(ApplicationV2) {
     this.close();
   }
 
+  static async noRoll(event, target) {
+    event.preventDefault();
+    RollWindow.getFormData(this.element, this.data);
+    let res = null;
+    res = await noRoll(this.data, this.data.rollInfo.properties.CALLBACK);
+    if (this.resolver) this.resolver(res);
+    this.close();
+  }
+
   static async onAltAction(event, target) {
     event.preventDefault();
     RollWindow.getFormData(this.element, this.data);
@@ -612,7 +633,6 @@ export class RollWindow extends HandlebarsApplicationMixin(ApplicationV2) {
     if (this.data.rollInfo.properties.ALT_ACTION) {
       res = await this.data.rollInfo.properties.ALT_ACTION(
         this.data,
-        0,
         this.data.rollInfo.properties.CALLBACK
       );
     }

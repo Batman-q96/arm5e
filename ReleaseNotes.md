@@ -1,3 +1,17 @@
+## 3.0.1.15 Stentorius BF8
+
+### Compatibility
+
+- Verified for 14.365
+
+### Bug fixes
+
+- Alternate magic rolls fixes
+  - Buttons to roll are visible again
+  - Button to use without any roll is now visible
+  - Fatigue is now correctly applied on use if enabled.
+- Additional details sections in chat messages are expandable again.
+
 ## 3.0.1.14 Stentorius BF7
 
 ### Compatibility - UPDATED
