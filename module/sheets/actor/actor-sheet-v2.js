@@ -1114,11 +1114,13 @@ export class ArM5eActorSheetV2 extends HandlebarsApplicationMixin(ActorSheetV2) 
     // are in the correct DOM order matching the PARTS definition.
     // AppV2 appends new parts via appendChild(), which puts them after the footer.
     const content = this.element.querySelector(".window-content") ?? this.element;
+    const scrollTop = content.scrollTop;
     const partKeys = Object.keys(this.constructor.PARTS);
     for (const partId of partKeys) {
       const el = content.querySelector(`[data-application-part="${partId}"]`);
       if (el) content.appendChild(el);
     }
+    content.scrollTop = scrollTop;
 
     if (this.magicSystem) {
       await this.magicSystem._onRender(context, options);

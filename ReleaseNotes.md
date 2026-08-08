@@ -4,6 +4,11 @@
 
 - Verified for 14.365
 
+### Features & changes
+
+- New active effect
+  - Xp modifier for Arts
+
 ### Bug fixes
 
 - Alternate magic rolls fixes
@@ -11,6 +16,7 @@
   - Button to use without any roll is now visible
   - Fatigue is now correctly applied on use if enabled.
 - Additional details sections in chat messages are expandable again.
+- It is again possible to edit PC Actor image profile
 
 ## 3.0.1.14 Stentorius BF7
 

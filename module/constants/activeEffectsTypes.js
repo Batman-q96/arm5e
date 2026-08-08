@@ -33,6 +33,10 @@ export function addActiveEffectsDefinitions() {
       default: 0
     }
   };
+  ACTIVE_EFFECTS_TYPES.artXp.subtypes = {
+    ...xpBonusTechniques(),
+    ...xpBonusForms()
+  };
 
   // Abilities related effects
 
@@ -630,6 +634,30 @@ const affinityForms = () => {
   }, {});
 };
 
+const xpBonusTechniques = () => {
+  return Object.entries(ARM5E.magic.techniques).reduce((a, current) => {
+    a[current[0]] = {
+      mnemonic: current[1].label,
+      key: `system.arts.techniques.${current[0]}.xpBonus`,
+      mode: 2,
+      default: 1
+    };
+    return a;
+  }, {});
+};
+
+const xpBonusForms = () => {
+  return Object.entries(ARM5E.magic.forms).reduce((a, current) => {
+    a[current[0]] = {
+      mnemonic: current[1].label,
+      key: `system.arts.forms.${current[0]}.xpBonus`,
+      mode: 2,
+      default: 1
+    };
+    return a;
+  }, {});
+};
+
 const deficientTechniques = () => {
   return Object.entries(ARM5E.magic.techniques).reduce((a, current) => {
     a[current[0]] = {
@@ -907,6 +935,15 @@ export const ACTIVE_EFFECTS_TYPES = {
     type: "artDeficiency",
     tags: ["character"],
     mnemonic: "arm5e.activeEffect.types.arts.deficiency",
+    subtypes: {
+      // added dynamically
+    }
+  },
+  artXp: {
+    category: "magic",
+    type: "artXp",
+    tags: ["character"],
+    mnemonic: "arm5e.activeEffect.types.arts.xpBonus",
     subtypes: {
       // added dynamically
     }
