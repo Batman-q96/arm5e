@@ -3,6 +3,7 @@
 ### Compatibility
 
 - Verified for 14.365
+- min Ars-compendia 1.2.6
 
 ### Features & changes
 
@@ -17,6 +18,7 @@
   - Fatigue is now correctly applied on use if enabled.
 - Additional details sections in chat messages are expandable again.
 - It is again possible to edit PC Actor image profile
+- Aging rolls will now use rolltables of ars-compendia
 
 ## 3.0.1.14 Stentorius BF7
 
