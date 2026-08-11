@@ -783,7 +783,7 @@ async function castSupernaturalEffect(actorCaster, roll, message) {
     }
     updateData["system.warping.points"] = actorCaster.system.warping.points + roll.botches;
   }
-  if (actorCaster.rollInfo.mode & ROLL_MODES.NO_ROLL) {
+  if (actorCaster.rollInfo.properties.MODE & ROLL_MODES.NO_ROLL) {
     messageUpdate["system.impact.applied"] = true;
   }
   const updateImpact = await _applyImpact(actorCaster, roll, message);

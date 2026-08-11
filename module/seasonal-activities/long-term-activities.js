@@ -100,10 +100,10 @@ export function ActivityFactory(type, owner, diaryData) {
  * @param message
  */
 export async function setAgingEffects(actor, roll, message) {
-  let rtCompendium = game.packs.get("arm5e.rolltables");
+  let rtCompendium = game.packs.get("arm5e-compendia.rolltables");
   let docs = await rtCompendium.getDocuments();
   const agingTable = docs.filter((rt) => rt.name === "Aging table")[0];
-  let res = agingTable.getResultsForRoll(roll.total)[0].description;
+  let res = agingTable.getResultsForRoll(roll.total)[0].name;
   let dialogData = CONFIG.ARM5E.activities.aging[res];
 
   dialogData.year = actor.rollInfo.environment.year;
@@ -173,7 +173,7 @@ export async function agingRoll(item) {
  * @param message
  */
 export async function agingCrisis(actor, roll, message) {
-  let rtCompendium = game.packs.get("arm5e.rolltables");
+  let rtCompendium = game.packs.get("arm5e-compendia.rolltables");
   let docs = await rtCompendium.getDocuments();
 
   const crisisTable = docs.filter((rt) => rt.name === "Aging crisis table")[0];

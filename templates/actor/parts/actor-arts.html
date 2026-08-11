@@ -13,10 +13,10 @@
 
             {{#if (eq @root.artsIcons "symbol")}}
               <img src="{{systemPath}}assets/magic/{{key}}.png" {{{technique.ui.style}}}
-                title="{{technique.ui.title}}{{numberFormat technique.bonus decimals=0 sign=true}}" />
+                title="{{technique.ui.title}}" />
             {{else}}
               <img src="{{systemPath}}assets/hands/{{key}}.png" {{{technique.ui.style}}}
-                title="{{technique.ui.title}}{{numberFormat technique.bonus decimals=0 sign=true}}" />
+                title="{{technique.ui.title}}" />
             {{/if}}
           </span>
           <div>
@@ -36,8 +36,9 @@
             </div>
             <div class="flex4 marginbot12" style="color: #625d52cc">
               <label class="fontSize8">{{localize "arm5e.sheet.experienceShort"}}</label>
-              <input type="number" name="system.arts.techniques.{{key}}.xp" value="{{technique.xp}}" data-dtype="Number"
-                style="color: #625d52cc; width: 40px" class="select-on-focus" />
+              <input type="number" data-technique="{{key}}" value="{{technique.finalXp}}" data-dtype="Number"
+                style="color: #625d52cc; width: 40px; {{technique.ui.xpStyle}}" class="xp-technique select-on-focus"
+                title="{{technique.ui.xpTitle}}" />
               <label class="fontSize8"> / {{ technique.xpNextLevel }} </label>
               <div></div>
             </div>
@@ -56,11 +57,9 @@
         <li class="flexrow art" data-attribute="{{key}}">
           <span class="flex03">
             {{#if (eq @root.artsIcons "symbol")}}
-              <img src="{{systemPath}}assets/magic/{{key}}.png" {{{form.ui.style}}}
-                title="{{form.ui.title}}{{numberFormat form.bonus decimals=0 sign=true}}" />
+              <img src="{{systemPath}}assets/magic/{{key}}.png" {{{form.ui.style}}} title="{{form.ui.title}}" />
             {{else}}
-              <img src="{{systemPath}}assets/hands/{{key}}.png" {{{form.ui.style}}}
-                title="{{form.ui.title}}{{numberFormat form.bonus decimals=0 sign=true}}" />
+              <img src="{{systemPath}}assets/hands/{{key}}.png" {{{form.ui.style}}} title="{{form.ui.title}}" />
             {{/if}}
           </span>
           <div>
@@ -81,8 +80,9 @@
             </div>
             <div class="flex3 marginbot12" style="color: #625d52cc">
               <label class="fontSize8">{{localize "arm5e.sheet.experienceShort"}}</label>
-              <input type="number" name="system.arts.forms.{{key}}.xp" value="{{form.xp}}" data-dtype="Number"
-                style="color: #625d52cc; width: 40px" class="select-on-focus" />
+              <input type="number" data-form="{{key}}" value="{{form.finalXp}}" data-dtype="Number"
+                style="color: #625d52cc; width: 40px; {{form.ui.xpStyle}}" class="xp-form select-on-focus"
+                title="{{form.ui.xpTitle}}" />
               <label class="fontSize8"> / {{ form.xpNextLevel }} </label>
             </div>
           </div>

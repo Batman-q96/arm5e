@@ -66,7 +66,6 @@ export class ArM5eRollInfo {
     }
 
     if (dataset.mode) {
-      // this.mode =  ;
       this.properties.MODE = parseInt(dataset.mode);
     }
 
@@ -259,7 +258,8 @@ export class ArM5eRollInfo {
           this.ability.score = effect.system.bonusAbility.score;
 
           const template = actorSystemData.magicSystem.templates[effect.system.template];
-          this.mode = template.rollType;
+          this.impact.fatigue.use = template.useFatigue ? 1 : 0;
+          this.properties.MODE = template.rollType;
         }
         this.initPenetrationVariables();
         this.listeners = addMagicListenersDialog;
@@ -747,7 +747,6 @@ export class ArM5eRollInfo {
   }
 
   reset() {
-    this.mode = 0;
     this.difficulty = 0;
     this.overload = 0;
     this.rootMessageUuid = null;

@@ -15,12 +15,12 @@ import { ARM5E } from "../config.js";
  * @param mode
  * @param callback
  */
-export async function exertSelf(actor, mode, callback) {
+export async function exertSelf(actor, callback) {
   log(false, "Exert self in combat");
 
   actor.rollInfo.combat.exertion = true;
 
-  await stressDie(actor, actor.rollInfo.type, callback, mode, -1);
+  await stressDie(actor, actor.rollInfo.type, 0, callback, -1);
 
   await actor.loseFatigueLevel(1);
 }

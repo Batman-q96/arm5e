@@ -32,12 +32,13 @@ export class BasicChatSchema extends foundry.abstract.TypeDataModel {
   }
 
   addListeners(html) {
-    const details = html.querySelector(".clickable");
-    if (details) {
-      details.addEventListener("click", (ev) => {
+    const details = html.querySelectorAll(".clickable");
+    if (details.length === 0) return;
+    details.forEach((detail) => {
+      detail.addEventListener("click", (ev) => {
         ev.currentTarget.nextElementSibling.classList.toggle("hide");
       });
-    }
+    });
   }
 
   getFlavor() {

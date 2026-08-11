@@ -213,28 +213,46 @@ export class Arm5eCharacterActorSheetV2 extends ArM5eActorSheetV2 {
 
         // Magic arts
         for (let [key, technique] of Object.entries(context.system.arts.techniques)) {
+          technique.ui = {
+            style: "",
+            title: "",
+            xpStyle: "",
+            xpTitle: ""
+          };
           if (technique.deficient) {
             technique.ui = {
               style: UI.STYLES.DEFICIENT_ART,
               title: game.i18n.localize("arm5e.activeEffect.types.arts.deficiency")
             };
           } else if (!technique.bonus && technique.xpCoeff === 1.0) {
-            technique.ui = { style: UI.STYLES.STANDARD_ART };
+            technique.ui.style = UI.STYLES.STANDARD_ART;
           } else if (!technique.bonus && technique.xpCoeff !== 1.0) {
-            technique.ui = {
-              style: UI.STYLES.AFINITY_ART,
-              title: game.i18n.localize("arm5e.activeEffect.types.arts.affinity")
-            };
+            technique.ui.style = UI.STYLES.AFINITY_ART;
+            technique.ui.title = `${game.i18n.localize(
+              "arm5e.activeEffect.types.arts.affinity"
+            )} : x ${technique.xpCoeff} ${game.i18n.localize("arm5e.sheet.experienceShort")}`;
           } else if (technique.bonus && technique.xpCoeff === 1.0) {
-            technique.ui = {
-              style: UI.STYLES.PUISSANT_ART,
-              title: ""
-            };
+            technique.ui.style = UI.STYLES.PUISSANT_ART;
+            technique.ui.title = `${game.i18n.localize(
+              "arm5e.activeEffect.types.arts.puissant"
+            )} : + ${technique.bonus}`;
           } else {
-            technique.ui = {
-              style: UI.STYLES.COMBO_ART,
-              title: game.i18n.localize("arm5e.activeEffect.types.arts.affinity")
-            };
+            technique.ui.style = UI.STYLES.COMBO_ART;
+            technique.ui.title = `${game.i18n.localize(
+              "arm5e.activeEffect.types.arts.affinity"
+            )} : x ${technique.xpCoeff} ${game.i18n.localize(
+              "arm5e.sheet.experienceShort"
+            )}, ${game.i18n.localize("arm5e.activeEffect.types.arts.puissant")} : + ${
+              technique.bonus
+            }`;
+          }
+          technique.finalXp = technique.xp + technique.xpBonus;
+
+          if (technique.xpBonus !== 0) {
+            technique.ui.xpTitle = `${technique.xpBonus > 0 ? "+" : "-"}${
+              technique.xpBonus
+            } ${game.i18n.localize("arm5e.sheet.experienceShort")}`;
+            technique.ui.xpStyle = "font-style: italic;";
           }
         }
 
@@ -249,30 +267,38 @@ export class Arm5eCharacterActorSheetV2 extends ArM5eActorSheetV2 {
         context.system.labTotals = {};
         context.system.labTotal = context.system.labTotal ?? {};
         for (let [key, form] of Object.entries(context.system.arts.forms)) {
+          form.ui = { style: "", title: "", xpStyle: "", xpTitle: "" };
           if (form.deficient) {
-            form.ui = {
-              style: UI.STYLES.DEFICIENT_ART,
-              title: game.i18n.localize("arm5e.activeEffect.types.arts.deficiency")
-            };
+            form.ui.style = UI.STYLES.DEFICIENT_ART;
+            form.ui.title = game.i18n.localize("arm5e.activeEffect.types.arts.deficiency");
           } else if (!form.bonus && form.xpCoeff === 1.0) {
-            form.ui = { style: UI.STYLES.STANDARD_ART };
+            form.ui.style = UI.STYLES.STANDARD_ART;
           } else if (!form.bonus && form.xpCoeff !== 1.0) {
-            form.ui = {
-              style: UI.STYLES.AFINITY_ART,
-              title: game.i18n.localize("arm5e.activeEffect.types.arts.affinity")
-            };
+            form.ui.style = UI.STYLES.AFINITY_ART;
+            form.ui.title = `${game.i18n.localize("arm5e.activeEffect.types.arts.affinity")} : x ${
+              form.xpCoeff
+            } ${game.i18n.localize("arm5e.sheet.experienceShort")}`;
           } else if (form.bonus && form.xpCoeff === 1.0) {
-            form.ui = {
-              style: UI.STYLES.PUISSANT_ART,
-              title: ""
-            };
+            form.ui.style = UI.STYLES.PUISSANT_ART;
+            form.ui.title = `${game.i18n.localize("arm5e.activeEffect.types.arts.puissant")} : + ${
+              form.bonus
+            }`;
           } else {
-            form.ui = {
-              style: UI.STYLES.COMBO_ART,
-              title: game.i18n.localize("arm5e.activeEffect.types.arts.affinity")
-            };
+            form.ui.style = UI.STYLES.COMBO_ART;
+            form.ui.title = `${game.i18n.localize("arm5e.activeEffect.types.arts.affinity")} : x ${
+              form.xpCoeff
+            } ${game.i18n.localize("arm5e.sheet.experienceShort")}
+              }, ${game.i18n.localize("arm5e.activeEffect.types.arts.puissant")} : + ${
+              form.bonus
+            } `;
           }
-
+          form.finalXp = form.xp + form.xpBonus;
+          if (form.xpBonus !== 0) {
+            form.ui.xpTitle = `${form.xpBonus > 0 ? "+" : "-"}${form.xpBonus} ${game.i18n.localize(
+              "arm5e.sheet.experienceShort"
+            )}`;
+            form.ui.xpStyle = "font-style: italic;";
+          }
           context.system.castingTotals[key] = {};
           context.system.labTotals[key] = {};
 
@@ -604,6 +630,34 @@ export class Arm5eCharacterActorSheetV2 extends ArM5eActorSheetV2 {
     this.element.querySelectorAll(".sanctum-link").forEach((el) => {
       el.addEventListener("change", (event) => this._onSanctumLinkChange(event));
     });
+    this.element.querySelectorAll(".xp-technique").forEach((el) => {
+      el.addEventListener("change", (event) => this._onXpTechniqueChange(event));
+    });
+    this.element.querySelectorAll(".xp-form").forEach((el) => {
+      el.addEventListener("change", (event) => this._onXpFormChange(event));
+    });
+  }
+
+  async _onXpTechniqueChange(event) {
+    event.preventDefault();
+    let value = parseInt(event.currentTarget.value);
+    const techniqueKey = event.currentTarget.dataset.technique;
+    value = value - this.actor.system.arts.techniques[techniqueKey].xpBonus;
+    if (value < 0) value = 0;
+    await this.actor.update({
+      [`system.arts.techniques.${techniqueKey}.xp`]: value
+    });
+  }
+
+  async _onXpFormChange(event) {
+    event.preventDefault();
+    let value = parseInt(event.currentTarget.value);
+    const formKey = event.currentTarget.dataset.form;
+    value = value - this.actor.system.arts.forms[formKey].xpBonus;
+    if (value < 0) value = 0;
+    await this.actor.update({
+      [`system.arts.forms.${formKey}.xp`]: value
+    });
   }
 
   async _onCovenantLinkChange(event) {
@@ -898,12 +952,10 @@ export class Arm5eCharacterActorSheetV2 extends ArM5eActorSheetV2 {
     event.preventDefault();
     const art = target.closest(".art")?.dataset?.attribute;
     if (!art) return;
-    const oldXp = this.actor.system.arts.techniques[art].xp;
-    const score = this.actor.system.arts.techniques[art].derivedScore;
-    const xpCoeff = this.actor.system.arts.techniques[art].xpCoeff;
-    const newXp = Math.round(((score + 1) * (score + 2)) / (2 * xpCoeff));
-    await this.actor.update({ [`system.arts.techniques.${art}.xp`]: newXp });
-    console.log(`Added ${newXp - oldXp} xps from ${oldXp} to ${newXp}`);
+    const data = this.actor.system.arts.techniques[art];
+    data.key = art;
+    data.type = "techniques";
+    await this._increaseArt(data);
   }
 
   static async decreaseTech(event, target) {
@@ -911,23 +963,19 @@ export class Arm5eCharacterActorSheetV2 extends ArM5eActorSheetV2 {
     const art = target.closest(".art")?.dataset?.attribute;
     if (!art) return;
     const data = this.actor.system.arts.techniques[art];
-    if (data.derivedScore === 0) return;
-    const oldXp = data.xp;
-    const newXp = Math.round(((data.derivedScore - 1) * data.derivedScore) / (2 * data.xpCoeff));
-    await this.actor.update({ [`system.arts.techniques.${art}.xp`]: newXp });
-    console.log(`Removed ${newXp - oldXp} xps from ${oldXp} to ${newXp} total`);
+    data.key = art;
+    data.type = "techniques";
+    await this._decreaseArt(data);
   }
 
   static async increaseForm(event, target) {
     event.preventDefault();
     const art = target.closest(".art")?.dataset?.attribute;
     if (!art) return;
-    const oldXp = this.actor.system.arts.forms[art].xp;
-    const score = this.actor.system.arts.forms[art].derivedScore;
-    const xpCoeff = this.actor.system.arts.forms[art].xpCoeff;
-    const newXp = Math.round(((score + 1) * (score + 2)) / (2 * xpCoeff));
-    await this.actor.update({ [`system.arts.forms.${art}.xp`]: newXp });
-    console.log(`Added ${newXp - oldXp} xps from ${oldXp} to ${newXp}`);
+    const data = this.actor.system.arts.forms[art];
+    data.key = art;
+    data.type = "forms";
+    await this._increaseArt(data);
   }
 
   static async decreaseForm(event, target) {
@@ -935,10 +983,31 @@ export class Arm5eCharacterActorSheetV2 extends ArM5eActorSheetV2 {
     const art = target.closest(".art")?.dataset?.attribute;
     if (!art) return;
     const data = this.actor.system.arts.forms[art];
-    if (data.derivedScore === 0) return;
+    data.key = art;
+    data.type = "forms";
+    await this._decreaseArt(data);
+  }
+
+  async _increaseArt(data) {
     const oldXp = data.xp;
-    const newXp = Math.round(((data.derivedScore - 1) * data.derivedScore) / (2 * data.xpCoeff));
-    await this.actor.update({ [`system.arts.forms.${art}.xp`]: newXp });
+    const xpMod = data.xpBonus;
+    const score = data.derivedScore;
+    const xpCoeff = data.xpCoeff;
+    const newXp = Math.max(0, Math.round((((score + 1) * (score + 2)) / 2 - xpMod) / xpCoeff));
+    await this.actor.update({ [`system.arts.${data.type}.${data.key}.xp`]: newXp });
+    console.log(`Added ${newXp - oldXp} xps from ${oldXp} to ${newXp}`);
+  }
+
+  async _decreaseArt(data) {
+    const oldXp = data.xp;
+    const xpMod = data.xpBonus;
+    const score = data.derivedScore;
+    const xpCoeff = data.xpCoeff;
+    // floor score achievable at xp=0 when xpMod is positive (e.g. xpMod=6 → floor score 3)
+    const minScore = Math.floor((Math.sqrt(1 + 8 * Math.max(0, xpMod)) - 1) / 2);
+    if (score <= minScore) return;
+    const newXp = Math.max(0, Math.round((((score - 1) * score) / 2 - xpMod) / xpCoeff));
+    await this.actor.update({ [`system.arts.${data.type}.${data.key}.xp`]: newXp });
     console.log(`Removed ${newXp - oldXp} xps from ${oldXp} to ${newXp} total`);
   }
 

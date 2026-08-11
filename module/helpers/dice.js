@@ -356,6 +356,7 @@ async function getRollFormula(actor) {
     } else if (rollInfo.type === "supernatural") {
       let valueTech = 0;
       let valueForm = 0;
+      if (rollInfo.characteristic !== "") msg = newLine(msg);
       valueTech = parseInt(rollInfo.magic.technique.score);
       valueForm = parseInt(rollInfo.magic.form.score);
       if (
@@ -930,7 +931,7 @@ export async function createRoll(rollFormula, multiplier, divide, options = {}) 
  * @param specialBehavior
  * @param callback
  */
-async function noRoll(actor, specialBehavior, callback) {
+async function noRoll(actor, callback) {
   actor = await getRollFormula(actor);
   const rollInfo = actor.rollInfo;
   const rollProperties = rollInfo.properties;
@@ -999,12 +1000,12 @@ async function noRoll(actor, specialBehavior, callback) {
   // actor.rollInfo.reset();
 }
 
-async function spontNoFatigue(actor, specialBehavior, callback) {
+async function spontNoFatigue(actor, callback) {
   actor.rollInfo.magic.divide = actor.system.bonuses.arts.spontDividerNoFatigue;
   actor.rollInfo.impact.fatigue.use = 0;
   actor.rollInfo.impact.fatigue.fail = 0;
   actor.rollInfo.impact.fatigue.partial = 0;
-  return await noRoll(actor, specialBehavior, callback);
+  return await noRoll(actor, callback);
 }
 
 /**
